@@ -1,0 +1,66 @@
+/* Custom styles */
+.sidebar .nav-item .nav-link {
+    padding: 1rem;
+}
+
+.sidebar .nav-item .nav-link i {
+    font-size: 1rem;
+}
+
+.sidebar .nav-item .nav-link span {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.sidebar-brand-icon i {
+    font-size: 1.5rem;
+}
+
+.topbar .dropdown .dropdown-menu {
+    width: 200px;
+}
+
+.table th {
+    font-weight: 600;
+}
+
+.modal-header {
+    background-color: #4e73df;
+    color: white;
+}
+
+.modal-header .close {
+    color: white;
+}
+
+.btn-icon-split .icon {
+    padding: 0.5rem;
+}
+
+.btn-icon-split .text {
+    padding: 0.5rem;
+}
+
+.card-header {
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #e3e6f0;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #5a5c69;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.428571429;
+} 
