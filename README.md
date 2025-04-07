@@ -6,7 +6,7 @@ Hệ thống quản lý phòng tập HD Pilates
 
 1. Clone repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/hoai2806/hdpilatesstudio.git
 ```
 
 2. Cấu hình database trong `config.php`
@@ -32,4 +32,4 @@ git push origin feature/ten-tinh-nang
 ## Deploy
 
 - Code sẽ tự động được deploy lên hosting khi push vào branch main
-- Kiểm tra status của deployment trong tab Actions trên GitHub 
+- Kiểm tra status của deployment trong tab Actions trên GitHub
