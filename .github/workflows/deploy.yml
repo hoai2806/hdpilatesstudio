@@ -2,37 +2,21 @@ name: Deploy to VPS
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
     steps:
       - uses: actions/checkout@v2
       
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
+      - name: Copy deploy script and execute
+        uses: appleboy/ssh-action@master
         with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: unnecessary
-          config: |
-            Host vps
-              HostName ${{ secrets.SSH_HOST }}
-              User ${{ secrets.SSH_USER }}
-              Port 28
-              IdentityFile ~/.ssh/id_ed25519
-          
-      - name: Adding Known Hosts
-        run: ssh-keyscan -p 28 -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-      
-      - name: Deploy with rsync
-        run: |
-          rsync -avz -e "ssh -p 28" --delete \
-            --exclude '.git*' \
-            --exclude '.github' \
-            --exclude 'node_modules' \
-            --exclude '.env' \
-            --exclude 'README.md' \
-            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/quanly.pilates.net.vn/html/ 
+          port: 28
+          script: |
+            chmod +x /usr/local/lsws/quanly.pilates.net.vn/html/deploy.sh
+            /usr/local/lsws/quanly.pilates.net.vn/html/deploy.sh 

@@ -1,7 +1,18 @@
-.DS_Store
-.vscode/
-vendor/
-node_modules/
-*.log
+# Ignore config file
 config.php
+
+# Ignore vendor directory
+/vendor/
+
+# Ignore node modules
+/node_modules/
+
+# Ignore IDE files
+.idea/
+.vscode/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+*.log
 .env 

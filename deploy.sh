@@ -1,16 +1,24 @@
 #!/bin/bash
 
-# Đường dẫn thư mục web
-DEPLOY_PATH="/home/quanly.pilates.net.vn/html"
+# Di chuyển đến thư mục web
+cd /usr/local/lsws/quanly.pilates.net.vn/html/
 
-# Pull code mới từ GitHub
-cd $DEPLOY_PATH
+# Backup file config.php hiện tại
+if [ -f config.php ]; then
+    cp config.php config.php.bak
+fi
+
+# Pull code mới từ git
 git pull origin main
 
+# Khôi phục file config.php
+if [ -f config.php.bak ]; then
+    mv config.php.bak config.php
+fi
+
 # Cập nhật quyền
-chown -R www-data:www-data .
-find . -type f -exec chmod 644 {} \;
-find . -type d -exec chmod 755 {} \;
+chown -R nobody:nobody /usr/local/lsws/quanly.pilates.net.vn/html/
+chmod -R 755 /usr/local/lsws/quanly.pilates.net.vn/html/
 
 # Xóa cache
 php artisan cache:clear

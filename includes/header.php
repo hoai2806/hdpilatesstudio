@@ -144,8 +144,6 @@ if (!isLoggedIn()) {
 
                 </nav>
                 <!-- End of Topbar -->
-            </div>
-        </div>
-    </div>
-</body>
-</html> 
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid"> 
