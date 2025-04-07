@@ -11,7 +11,7 @@ $success_message = '';
 
 // Lấy danh sách huấn luyện viên
 try {
-    $stmt = $pdo->query("SELECT * FROM instructors ORDER BY status ASC, created_at DESC");
+    $stmt = $pdo->query("SELECT * FROM instructors ORDER BY created_at DESC");
     $instructors = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Lỗi truy vấn dữ liệu: " . $e->getMessage());
@@ -141,8 +141,8 @@ include 'includes/header.php';
                             <td><?php echo htmlspecialchars($instructor['name']); ?></td>
                             <td><?php echo htmlspecialchars($instructor['email']); ?></td>
                             <td><?php echo htmlspecialchars($instructor['phone']); ?></td>
-                            <td><?php echo htmlspecialchars($instructor['specialization']); ?></td>
-                            <td><?php echo htmlspecialchars($instructor['experience']); ?></td>
+                            <td><?php echo !empty($instructor['specialization']) ? htmlspecialchars($instructor['specialization']) : ''; ?></td>
+                            <td><?php echo !empty($instructor['experience']) ? htmlspecialchars($instructor['experience']) : ''; ?></td>
                             <td>
                                 <?php if ($instructor['status'] === 'active'): ?>
                                     <span class="badge badge-success">Đang làm việc</span>
@@ -239,11 +239,11 @@ include 'includes/header.php';
                     </div>
                     <div class="form-group">
                         <label for="edit_specialization">Chuyên môn</label>
-                        <input type="text" class="form-control" id="edit_specialization" name="specialization" value="<?php echo htmlspecialchars($edit_instructor['specialization']); ?>" required>
+                        <input type="text" class="form-control" id="edit_specialization" name="specialization" value="<?php echo !empty($edit_instructor['specialization']) ? htmlspecialchars($edit_instructor['specialization']) : ''; ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="edit_experience">Kinh nghiệm</label>
-                        <textarea class="form-control" id="edit_experience" name="experience" rows="3"><?php echo htmlspecialchars($edit_instructor['experience']); ?></textarea>
+                        <textarea class="form-control" id="edit_experience" name="experience" rows="3"><?php echo !empty($edit_instructor['experience']) ? htmlspecialchars($edit_instructor['experience']) : ''; ?></textarea>
                     </div>
                     <div class="form-group">
                         <label for="edit_status">Trạng thái</label>
