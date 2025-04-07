@@ -155,8 +155,6 @@ include 'includes/header.php';
     </div>
 </div>
 
-</div> <!-- Đóng container-fluid -->
-
 <?php include 'includes/footer.php'; ?>
 
 <!-- Page level plugins -->
