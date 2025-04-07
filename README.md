@@ -33,3 +33,7 @@ git push origin feature/ten-tinh-nang
 
 - Code sẽ tự động được deploy lên hosting khi push vào branch main
 - Kiểm tra status của deployment trong tab Actions trên GitHub
+- Quy trình deploy tự động:
+  1. Push code lên GitHub
+  2. GitHub Actions tự động deploy lên VPS
+  3. Code được cập nhật vào thư mục /home/quanly.pilates.net.vn/html/
