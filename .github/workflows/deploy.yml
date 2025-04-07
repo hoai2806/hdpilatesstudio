@@ -1,9 +1,9 @@
-name: Deploy to Hosting
+name: Deploy to VPS
 
 on:
   push:
     branches:
-      - main  # hoặc master tùy theo branch chính của bạn
+      - main
 
 jobs:
   deploy:
@@ -12,17 +12,27 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Deploy to Hosting
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /public_html/
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            README.md
-            .vscode/**
-            .env 
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: unnecessary
+          config: |
+            Host vps
+              HostName ${{ secrets.SSH_HOST }}
+              User ${{ secrets.SSH_USER }}
+              Port 28
+              IdentityFile ~/.ssh/id_ed25519
+          
+      - name: Adding Known Hosts
+        run: ssh-keyscan -p 28 -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      
+      - name: Deploy with rsync
+        run: |
+          rsync -avz -e "ssh -p 28" --delete \
+            --exclude '.git*' \
+            --exclude '.github' \
+            --exclude 'node_modules' \
+            --exclude '.env' \
+            --exclude 'README.md' \
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/quanly.pilates.net.vn/html/ 
